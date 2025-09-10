@@ -1,0 +1,16 @@
+/* Grid container */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto; /* center grid */
+}
+
+/* Make sure product cards expand evenly */
+.product-grid .product-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

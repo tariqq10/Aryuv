@@ -1,0 +1,88 @@
+/* src/styles/navbar.css */
+
+/* Whole navbar */
+.navbar {
+  background: linear-gradient(90deg, #1f2937, #111827); /* Sleek dark gradient */
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #facc15; /* Modern warm gold */
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+  color: #fde047; /* Lighter gold */
+}
+
+/* Links container */
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  position: relative;
+}
+
+/* Each link */
+.nav-link {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #facc15; /* matches logo gold */
+}
+
+/* Active link effect (if you use NavLink later) */
+.nav-link.active {
+  color: #facc15;
+  font-weight: 600;
+}
+
+/* Cart link */
+.navbar-cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Cart badge */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -14px;
+  background: #ef4444; /* Vibrant red */
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 0.25rem 0.55rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  animation: pop 0.3s ease;
+}
+
+/* Subtle badge animation */
+@keyframes pop {
+  0% { transform: scale(0.7); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
