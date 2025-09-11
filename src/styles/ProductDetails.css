@@ -55,3 +55,27 @@
 .add-to-cart-btn:hover {
   background-color: #f4c150;
 }
+@media (max-width: 600px) {
+  .product-details {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .product-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .product-title {
+    font-size: 1.5rem;
+  }
+
+  .product-price {
+    font-size: 1.2rem;
+  }
+
+  .add-to-cart-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+}
