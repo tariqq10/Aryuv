@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import "../styles/auth.css";
 
@@ -12,10 +11,25 @@ export default function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login data:", formData);
-    alert("Login successful!");
+    try {
+      const res = await fetch("http://localhost:4000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", data.token); // ✅ Save token
+        alert("✅ Login successful!");
+      } else {
+        alert("❌ " + data.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Something went wrong. Try again.");
+    }
   };
 
   return (

@@ -1,6 +1,5 @@
-// src/pages/Signup.jsx
 import { useState } from "react";
-import "../styles/auth.css"; // ✅ we'll create this file
+import "../styles/auth.css";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -13,10 +12,24 @@ export default function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Signup data:", formData);
-    alert("Account created successfully!");
+    try {
+      const res = await fetch("http://localhost:4000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert("✅ Account created successfully!");
+      } else {
+        alert("❌ " + data.message);
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Something went wrong. Try again.");
+    }
   };
 
   return (

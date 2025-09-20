@@ -2,26 +2,22 @@ import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import "../styles/productGrid.css";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/products.json`)
+    fetch("https://bakend-vea1.onrender.com/products") // ✅ correct endpoint
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         return res.json();
       })
       .then((data) => {
-        setProducts(data);
+        setProducts(data); // backend returns array directly
         setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Fetch error:", err);
         setLoading(false);
       });
   }, []);

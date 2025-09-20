@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
-import "../styles/Checkout.css"; // import CSS file
+import "../styles/Checkout.css";
 
 export default function Checkout() {
   const { cart, clearCart } = useCart();
@@ -20,15 +20,41 @@ export default function Checkout() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.address) {
       alert("Please fill out all fields.");
       return;
     }
-    clearCart();
-    localStorage.removeItem("checkoutForm");
-    setOrderPlaced(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("❌ Please log in first to place an order.");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:4000/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // ✅ Auth required
+        },
+        body: JSON.stringify({ cart, formData, total }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        clearCart();
+        localStorage.removeItem("checkoutForm");
+        setOrderPlaced(true);
+      } else {
+        alert("❌ " + data.message);
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      alert("Something went wrong.");
+    }
   };
 
   if (orderPlaced) {
