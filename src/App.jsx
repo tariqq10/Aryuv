@@ -5,21 +5,20 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import LandingPage from "./pages/LandingPage"; // ✅ new import
 
 function App() {
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navbar visible on all pages */}
       <Navbar />
-
-      {/* Page content */}
       <div className="p-6">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LandingPage />} /> {/* ✅ Landing Page */}
+          <Route path="/home" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-            <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </div>

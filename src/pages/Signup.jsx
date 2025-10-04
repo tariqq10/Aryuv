@@ -3,8 +3,7 @@ import "../styles/auth.css";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    username: "", // 🔄 keep username
     password: "",
   });
 
@@ -15,7 +14,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/api/auth/signup", {
+      const res = await fetch("https://bakend-vea1.onrender.com/api/signup", { // 🔄 deployed backend
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -37,21 +36,11 @@ export default function Signup() {
       <h2>Create an Account</h2>
       <form onSubmit={handleSubmit} className="auth-form">
         <label>
-          Name:
+          Username:
           <input
             type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
+            name="username"
+            value={formData.username}
             onChange={handleChange}
             required
           />

@@ -3,7 +3,7 @@ import "../styles/auth.css";
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -14,11 +14,12 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch("https://bakend-vea1.onrender.com/api/login", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
+
       const data = await res.json();
       if (res.ok) {
         localStorage.setItem("token", data.token); // ✅ Save token
@@ -37,11 +38,11 @@ export default function Login() {
       <h2>Login</h2>
       <form onSubmit={handleSubmit} className="auth-form">
         <label>
-          Email:
+          Username:
           <input
-            type="email"
-            name="email"
-            value={formData.email}
+            type="text"
+            name="username"
+            value={formData.username}
             onChange={handleChange}
             required
           />
