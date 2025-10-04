@@ -8,12 +8,14 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     localStorage.removeItem("checkoutForm");
     alert("👋 You’ve been logged out.");
-    navigate("/"); // back to landing
+    navigate("/");
   };
 
   return (
@@ -37,7 +39,14 @@ export default function Navbar() {
           Checkout
         </Link>
 
-        {/* ✅ Only show logout if logged in */}
+        {/* ✅ Only show Admin link for admin users */}
+        {token && role === "admin" && (
+          <Link to="/admin" className="nav-link">
+            <span className="material-symbols-outlined">admin_panel_settings</span>
+            Admin
+          </Link>
+        )}
+
         {token && (
           <button onClick={handleLogout} className="nav-link logout-btn">
             <span className="material-symbols-outlined">logout</span>
